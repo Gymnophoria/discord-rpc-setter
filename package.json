@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Gymnophoria/discord-rpc-setter#readme",
   "devDependencies": {
     "electron": "^1.7.10"
+  },
+  "dependencies": {
+    "getmdl-select": "^2.0.1"
   }
 }

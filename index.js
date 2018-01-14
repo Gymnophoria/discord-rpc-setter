@@ -9,7 +9,7 @@ const url = require('url');
 let appWindow;
 
 function createWindow() {
-	appWindow = new BrowserWindow({width: 600, height: 400});
+	appWindow = new BrowserWindow({width: 700, height: 400, backgroundColor: '#ffffff', resizable: true, fullscreenable: false});
 
 	appWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'index.html'),
@@ -25,13 +25,5 @@ function createWindow() {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', function () {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
-});
-
-app.on('activate', function () {
-	if (appWindow === null) {
-		createWindow();
-	}
+	app.quit();
 });

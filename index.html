@@ -1,1 +1,118 @@
-hello world
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Discord RPC</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-blue.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+        <link rel="stylesheet" href="node_modules/getmdl-select/getmdl-select.min.css">
+        <script defer src="node_modules/getmdl-select/getmdl-select.min.js"></script>
+
+        <link href="css/index.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header mdl-layout--no-drawer-button">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Discord Rich Presence Setter</span>
+                    <div class="mdl-layout-spacer"></div>
+                    <img src="media/discord-logo.png" class="mdl-layout-icon" height="80%">
+                </div>
+            </header>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                                <div class="mdl-tabs__tab-bar">
+                                    <a href="#text-panel" class="mdl-tabs__tab is-active">Text</a>
+                                    <a href="#images-panel" class="mdl-tabs__tab">Images</a>
+                                    <a href="#timing-panel" class="mdl-tabs__tab">Timing</a>
+                                </div>
+
+                                <div class="mdl-tabs__panel is-active" id="text-panel">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" id="titleInput">
+                                            <label class="mdl-textfield__label" for="titleInput">Title</label>
+                                        </div>
+                                    </form>
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" id="detailInput">
+                                            <label class="mdl-textfield__label" for="detailInput">Details</label>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="mdl-tabs__panel" id="images-panel">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+                                        <input class="mdl-textfield__input" placeholder="Primary Image" id="primaryImage" readonly/>
+                                        <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                                            <i class="material-icons">attach_file</i><input type="file" id="primaryUploadBtn">
+                                        </div>
+                                    </div>
+                                    <form id="primaryImageTextForm" action="#">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" id="primaryImageText">
+                                            <label class="mdl-textfield__label" for="primaryImageText">Primary Image Text (Optional)</label>
+                                        </div>
+                                    </form>
+
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+                                        <input class="mdl-textfield__input" placeholder="Secondary Image" id="secondaryImage" readonly/>
+                                        <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                                            <i class="material-icons">attach_file</i><input type="file" accept=".png,.jpg,.jpeg" id="secondaryUploadBtn">
+                                        </div>
+                                    </div>
+                                    <form id="secondaryImageTextForm" action="#">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" id="secondaryImageText">
+                                            <label class="mdl-textfield__label" for="secondaryImageText">Secondary Image Text (Optional)</label>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="mdl-tabs__panel" id="timing-panel">
+                                    <form action="#">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" placeholder="Minutes" pattern="-?[0-9]*(\.[0-9]+)? Minutes" id="endDate">
+                                            <label class="mdl-textfield__label" for="endDate">Ends in..</label>
+                                            <span class="mdl-textfield__error">Input is not a number.</span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-layout-spacer"></div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Enable</button>
+                                <div class="mdl-layout-spacer"></div>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" disabled>Update</button>
+                                <div class="mdl-layout-spacer"></div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-wide mdl-card mdl-shadow--2dp"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script>
+	    document.getElementById("primaryUploadBtn").onchange = function () {
+		    document.getElementById("primaryImage").value = this.files[0].name;
+		    document.getElementById("primaryImageTextForm").style.display = "block";
+	    };
+
+        document.getElementById("secondaryUploadBtn").onchange = function () {
+            document.getElementById("secondaryImage").value = this.files[0].name;
+            document.getElementById("secondaryImageTextForm").style.display = "block";
+        };
+    </script>
+</html>
