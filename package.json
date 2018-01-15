@@ -2,7 +2,7 @@
   "name": "discord-rpc-setter",
   "version": "0.1.0",
   "description": "Set your Discord Rich Presence message.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "electron ."
   },
