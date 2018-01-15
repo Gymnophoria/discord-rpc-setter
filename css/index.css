@@ -1,22 +1,62 @@
-.mdl-button--file input {
-    cursor: pointer;
-    height: 100%;
-    right: 0;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    width: 300px;
-    z-index: 4;
-}
+/* text forms for images */
 
-.mdl-textfield--file .mdl-textfield__input {
-    box-sizing: border-box;
-    width: calc(100% - 32px);
-}
-.mdl-textfield--file .mdl-button--file {
-    right: 0;
-}
-
-#primaryImageTextForm, #secondaryImageTextForm {
+#largeImageTextForm, #smallImageTextForm {
     display: none;
+}
+
+/* text at top */
+
+p {
+    color: gray;
+}
+
+/* image on right */
+
+.demo-card-image.mdl-card {
+    width: 250px;
+    height: 393px;
+    background: url('../media/screenshot2.jpg') center / cover;
+    border-radius: 5px;
+}
+
+/* footer w/ enable/disable and update buttons */
+
+.footer {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* animated toast notifications (enable, update, disable) */
+
+.toast {
+    position: absolute;
+    z-index: 101;
+    top: 9px;
+    left: 375px;
+    right: 75px;
+    background: #323232;
+    text-align: center;
+    line-height: 2.8;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 5px black;
+    border-radius: 2px;
+}
+
+.cssanimations.csstransforms .toast {
+    -webkit-transform: translateY(-50px);
+    -webkit-animation-duration: 2.5s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0); }
 }

@@ -13,91 +13,189 @@
         <link rel="stylesheet" href="node_modules/getmdl-select/getmdl-select.min.css">
         <script defer src="node_modules/getmdl-select/getmdl-select.min.js"></script>
 
+        <script src="js/things.js"></script>
+
         <link href="css/index.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header class="mdl-layout__header mdl-layout--no-drawer-button">
+            <header class="mdl-layout__header mdl-layout--no-drawer-button mdl-shadow--2dp">
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title">Discord Rich Presence Setter</span>
                     <div class="mdl-layout-spacer"></div>
-                    <img src="media/discord-logo.png" class="mdl-layout-icon" height="80%">
+                </div>
+
+                <div id="disabledToast" class="toast">
+                    Rich Presence Disabled.
+                </div>
+                <div id="updatedToast" class="toast">
+                    Rich Presence Status Updated.
+                </div>
+                <div id="enabledToast" class="toast">
+                    Rich Presence Enabled.
                 </div>
             </header>
             <main class="mdl-layout__content">
                 <div class="page-content">
                     <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-cell mdl-cell--5-col">
+                            <p>Every field is optional.</p>
                             <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                                 <div class="mdl-tabs__tab-bar">
+                                    <a href="#preset-panel" class="mdl-tabs__tab">Presets</a>
                                     <a href="#text-panel" class="mdl-tabs__tab is-active">Text</a>
                                     <a href="#images-panel" class="mdl-tabs__tab">Images</a>
                                     <a href="#timing-panel" class="mdl-tabs__tab">Timing</a>
                                 </div>
 
+                                <div class="mdl-tabs__panel" id="preset-panel">
+                                    <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                        <div class="mdl-cell mdl-cell--3-col">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                                                <input value="" class="mdl-textfield__input" id="presetChoose" readonly style="color: gray;">
+                                                <input type="hidden" value="" name="presetChoose">
+                                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                <label for="presetChoose" class="mdl-textfield__label">Preset</label>
+                                                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                    <li class="mdl-menu__item" data-val="NAp" data-selected="true" style="color: gray;">None</li>
+                                                    <li class="mdl-menu__item" data-val="XD">xd</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--3-col">
+                                            <form onsubmit="return false;">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="form mdl-textfield__input" id="presetName">
+                                                    <label class="mdl-textfield__label" for="presetName">Preset Name</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                        <div class="mdl-cell mdl-cell--2-col"></div>
+                                        <div class="mdl-cell mdl-cell--2-col">
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">Update</button>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--2-col">
+                                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">New</button>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--2-col"></div>
+                                    </div>
+                                </div>
+
                                 <div class="mdl-tabs__panel is-active" id="text-panel">
-                                    <form action="#">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" id="titleInput">
-                                            <label class="mdl-textfield__label" for="titleInput">Title</label>
-                                        </div>
-                                    </form>
-                                    <form action="#">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" id="detailInput">
-                                            <label class="mdl-textfield__label" for="detailInput">Details</label>
-                                        </div>
-                                    </form>
+                                    <div class="mdl-grid">
+                                        <div class="mdl-layout-spacer"></div>
+                                        <form onsubmit="return false;">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="form mdl-textfield__input" id="titleInput">
+                                                <label class="mdl-textfield__label" for="titleInput">Title</label>
+                                            </div>
+                                        </form>
+                                        <div class="mdl-layout-spacer"></div>
+                                    </div>
+                                    <div class="mdl-grid">
+                                        <div class="mdl-layout-spacer"></div>
+                                        <form onsubmit="return false;">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="form mdl-textfield__input" id="detailInput">
+                                                <label class="mdl-textfield__label" for="detailInput">Details</label>
+                                            </div>
+                                        </form>
+                                        <div class="mdl-layout-spacer"></div>
+                                    </div>
                                 </div>
 
                                 <div class="mdl-tabs__panel" id="images-panel">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
-                                        <input class="mdl-textfield__input" placeholder="Primary Image" id="primaryImage" readonly/>
-                                        <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-                                            <i class="material-icons">attach_file</i><input type="file" id="primaryUploadBtn">
+                                    <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                                                <input value="" class="mdl-textfield__input" id="large-image-select" readonly style="color: gray;">
+                                                <input type="hidden" value="" name="large-image-select">
+                                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                <label for="large-image-select" class="mdl-textfield__label">Large Image</label>
+                                                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                    <li class="mdl-menu__item" data-val="NAl" data-selected="true" style="color: gray;">None</li>
+                                                    <li class="mdl-menu__item" data-val="WIP">WIP</li>
+                                                    <li class="mdl-menu__item" data-val="MIS">Images coming soon.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <form id="largeImageTextForm" onsubmit="return false;">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="mdl-textfield__input" id="largeImageText">
+                                                    <label class="mdl-textfield__label" for="largeImageText">Large Image Text</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                                                <input value="" class="mdl-textfield__input" id="small-image-select" readonly style="color: gray;">
+                                                <input type="hidden" value="" name="small-image-select">
+                                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                <label for="small-image-select" class="mdl-textfield__label">Small Image</label>
+                                                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                                    <li class="mdl-menu__item" data-val="NAs" data-selected="true" style="color: gray;">None</li>
+                                                    <li class="mdl-menu__item" data-val="BY">Please suggest</li>
+                                                    <li class="mdl-menu__item" data-val="BR">Images to put</li>
+                                                    <li class="mdl-menu__item" data-val="ES">In these spaces</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <form id="smallImageTextForm" onsubmit="return false;">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="mdl-textfield__input" id="smallImageText">
+                                                    <label class="mdl-textfield__label" for="smallImageText">Small Image Text</label>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <form id="primaryImageTextForm" action="#">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" id="primaryImageText">
-                                            <label class="mdl-textfield__label" for="primaryImageText">Primary Image Text (Optional)</label>
-                                        </div>
-                                    </form>
-
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
-                                        <input class="mdl-textfield__input" placeholder="Secondary Image" id="secondaryImage" readonly/>
-                                        <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-                                            <i class="material-icons">attach_file</i><input type="file" accept=".png,.jpg,.jpeg" id="secondaryUploadBtn">
-                                        </div>
-                                    </div>
-                                    <form id="secondaryImageTextForm" action="#">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" id="secondaryImageText">
-                                            <label class="mdl-textfield__label" for="secondaryImageText">Secondary Image Text (Optional)</label>
-                                        </div>
-                                    </form>
                                 </div>
 
                                 <div class="mdl-tabs__panel" id="timing-panel">
-                                    <form action="#">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" placeholder="Minutes" pattern="-?[0-9]*(\.[0-9]+)? Minutes" id="endDate">
-                                            <label class="mdl-textfield__label" for="endDate">Ends in..</label>
-                                            <span class="mdl-textfield__error">Input is not a number.</span>
+                                    <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                        <div class="mdl-cell mdl-cell--6-col">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="startCheckbox">
+                                                <input type="checkbox" id="startCheckbox" class="mdl-checkbox__input">
+                                                <span class="mdl-checkbox__label">Starting Now</span>
+                                            </label>
                                         </div>
-                                    </form>
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                        <div class="mdl-cell mdl-cell--6-col">
+                                            <form onsubmit="return false;">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                    <input class="form mdl-textfield__input" placeholder="Minutes" pattern="-?[0-9]*(\.[0-9]+)?" id="endDate">
+                                                    <label class="mdl-textfield__label" for="endDate">Ends in..</label>
+                                                    <span class="mdl-textfield__error">Input is not a number.</span>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--1-col"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mdl-grid">
-                                <div class="mdl-layout-spacer"></div>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Enable</button>
-                                <div class="mdl-layout-spacer"></div>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" disabled>Update</button>
-                                <div class="mdl-layout-spacer"></div>
+                            <div class="footer" style="box-shadow: 0 0 20px gray">
+                                <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--1-col"></div>
+                                    <div class="mdl-cell mdl-cell--2-col">
+                                        <button id="toggle-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-shadow--6dp">Enable</button>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--2-col">
+                                        <button id="update-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect mdl-shadow--6dp" disabled>Update</button>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--3-col"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-wide mdl-card mdl-shadow--2dp"></div>
+                        <div class="mdl-cell mdl-cell--3-col">
+                            <div class="demo-card-image mdl-card mdl-shadow--16dp">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                                <div class="mdl-card__actions"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,14 +203,79 @@
         </div>
     </body>
     <script>
-	    document.getElementById("primaryUploadBtn").onchange = function () {
-		    document.getElementById("primaryImage").value = this.files[0].name;
-		    document.getElementById("primaryImageTextForm").style.display = "block";
-	    };
+        let smallImage = document.getElementById('small-image-select');      // showing text boxes when an image is selected
+        let smallImageText = document.getElementById('smallImageTextForm');
+        let largeImage = document.getElementById('large-image-select');
+        let largeImageText = document.getElementById('largeImageTextForm');
 
-        document.getElementById("secondaryUploadBtn").onchange = function () {
-            document.getElementById("secondaryImage").value = this.files[0].name;
-            document.getElementById("secondaryImageTextForm").style.display = "block";
+        smallImage.onchange = function () {
+        	if (smallImage.value === 'None') {
+        		smallImage.style = 'color: gray;';
+        		smallImageText.style.display = 'none';
+            } else {
+            	smallImage.style = '';
+            	smallImageText.style.display = 'block';
+            }
         };
+
+        largeImage.onchange = function () {
+        	if (largeImage.value === 'None') {
+        		largeImage.style = 'color: gray';
+        		largeImageText.style.display = 'none';
+            } else {
+        		largeImage.style = '';
+        		largeImageText.style.display = 'block';
+            }
+        };
+
+
+        let endDate = document.getElementById('endDate');  // making end date display minutes after input number
+
+        endDate.addEventListener('focus', function(event) {
+        	if (event.target.value.endsWith(' Minutes')) event.target.value = event.target.value.slice(0, -8);
+        });
+        endDate.addEventListener('blur', function(event) {
+        	event.target.value = event.target.value + ' Minutes';
+        });
+
+
+        let presetChoose = document.getElementById('presetChoose');  // choosing rich presence presets
+
+        presetChoose.onchange = function () {
+	        if (presetChoose.value === 'None') presetChoose.style = 'color: gray';
+	        else presetChoose.style = '';
+        };
+
+
+        let toggleButton = document.getElementById('toggle-button');  // enable/disable button
+        let updateButton = document.getElementById('update-button');  // update button
+
+        let enabledToast = document.getElementById('enabledToast');   // toast displayed when RPC enabled
+        let disabledToast = document.getElementById('disabledToast'); // toast "                " disabled
+        let updatedToast = document.getElementById('updatedToast');   // toast "                " updated
+
+        toggleButton.onclick = function () {
+        	if (toggleButton.textContent === 'Enable') {
+			        setTimeout(function () { toggleButton.textContent = 'Disable'; }, 200);
+			        updateButton.removeAttribute('disabled');
+                    enabledToast.style.webkitAnimationName = 'slideDown';
+            } else {
+			        setTimeout(function () { toggleButton.textContent = 'Enable'; }, 300);
+			        updateButton.setAttribute('disabled', '');
+			        disabledToast.style.webkitAnimationName = 'slideDown';
+            }
+        };
+
+        updateButton.onclick = function () {
+        	updatedToast.style.webkitAnimationName = 'slideDown';
+        };
+
+        updatedToast.addEventListener('webkitAnimationEnd', deleteAnimationName, false);
+        enabledToast.addEventListener('webkitAnimationEnd', deleteAnimationName, false);
+        disabledToast.addEventListener('webkitAnimationEnd', deleteAnimationName, false);
+
+        function deleteAnimationName () {
+	        this.style.webkitAnimationName = '';
+        }
     </script>
 </html>

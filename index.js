@@ -9,7 +9,7 @@ const url = require('url');
 let appWindow;
 
 function createWindow() {
-	appWindow = new BrowserWindow({width: 700, height: 400, backgroundColor: '#ffffff', resizable: true, fullscreenable: false});
+	appWindow = new BrowserWindow({width: 700, height: 500, backgroundColor: '#ffffff', resizable: false, fullscreenable: false});
 
 	appWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'index.html'),
