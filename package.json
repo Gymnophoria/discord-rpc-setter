@@ -1,10 +1,12 @@
 {
   "name": "discord-rpc-setter",
+  "productName": "Discord RPC Setter",
   "version": "0.1.0",
   "description": "Set your Discord Rich Presence message.",
   "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager ."
   },
   "repository": {
     "type": "git",
@@ -20,10 +22,11 @@
     "url": "https://github.com/Gymnophoria/discord-rpc-setter/issues"
   },
   "homepage": "https://github.com/Gymnophoria/discord-rpc-setter#readme",
-  "devDependencies": {
-    "electron": "^1.7.10"
-  },
   "dependencies": {
     "getmdl-select": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^10.1.1",
+    "electron": "1.7.11"
   }
 }
